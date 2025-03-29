@@ -11,7 +11,7 @@
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
-    "icon": "pacs/admin/icon.png",
+    "icon": "admin/icon.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/mihailkol/ioBroker.pacs/main/admin/icon.png",
     "keywords": [
