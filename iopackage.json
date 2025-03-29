@@ -1,0 +1,61 @@
+{
+  "common": {
+    "name": "pacs",
+    "version": "0.0.1",
+    "title": "PACS - Система контроля доступа",
+    "desc": {
+      "en": "Physical Access Control System for ioBroker",
+      "de": "Zutrittskontrollsystem für ioBroker",
+      "ru": "Система контроля физического доступа для ioBroker"
+    },
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "pacs/admin/icon.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/mihailkol/ioBroker.pacs/main/admin/icon.png",
+    "keywords": [
+      "pacs",
+      "access control",
+      "security"
+    ],
+    "readme": "https://github.com/mihailkol/ioBroker.pacs/blob/main/README.md",
+    "loglevel": "info",
+    "restartAdapters": [],
+    "localLink": "%web_protocol%://%ip%:%web_port%/pacs/index.html",
+    "type": "security",
+    "adminUI": {
+      "config": "json"
+    },
+    "supportCustoms": true,
+    "messagebox": true,
+    "eraseOnUpload": true,
+    "dependencies": [
+      {
+        "js-controller": ">=3.0.0"
+      }
+    ]
+  },
+  "native": {
+    "option1": true,
+    "option2": "42"
+  },
+  "instanceObjects": [
+    {
+      "_id": "devices",
+      "type": "channel",
+      "common": {
+        "name": "Устройства контроля доступа",
+        "desc": "Список устройств системы контроля доступа"
+      }
+    },
+    {
+      "_id": "users",
+      "type": "channel",
+      "common": {
+        "name": "Пользователи системы",
+        "desc": "Список пользователей с правами доступа"
+      }
+    }
+  ]
+}
