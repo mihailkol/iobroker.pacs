@@ -23,7 +23,7 @@
             {
               "type": "text",
               "title": "Name",
-              "width": "15%",
+              "width": "20%",
               "attr": "name",
               "filter": false,
               "sort": false,
@@ -61,15 +61,15 @@
               "options": [
                 {
                   "value": "working_hours",
-                  "label": "Working hours (9:00-18:00)"
+                  "label": "Working hours"
                 },
                 {
                   "value": "any_time",
-                  "label": "Any time (24/7)"
+                  "label": "Any time"
                 },
                 {
                   "value": "always",
-                  "label": "Always (no restrictions)"
+                  "label": "Always"
                 }
               ]
             },
@@ -83,19 +83,14 @@
               "default": false
             },
             {
-              "type": "select",
+              "type": "text",
               "title": "Devices",
-              "width": "20%",
+              "width": "25%",
               "attr": "devices",
               "filter": false,
               "sort": false,
               "default": "",
-              "options": [],
-              "query": {
-                "method": "getDevicesList",
-                "params": {}
-              },
-              "multiple": true
+              "placeholder": "Device IDs, comma separated"
             }
           ]
         }
@@ -119,7 +114,7 @@
             {
               "type": "text",
               "title": "Name",
-              "width": "25%",
+              "width": "30%",
               "attr": "name",
               "filter": false,
               "sort": false,
@@ -127,30 +122,24 @@
               "placeholder": "Enter device name"
             },
             {
-              "type": "select",
+              "type": "text",
               "title": "Object",
-              "width": "35%",
+              "width": "40%",
               "attr": "object",
               "filter": false,
               "sort": false,
               "default": "",
-              "options": [],
-              "query": {
-                "method": "getObjectsList",
-                "params": {
-                  "type": "device"
-                }
-              }
+              "placeholder": "Enter object ID"
             },
             {
               "type": "text",
               "title": "Command",
-              "width": "40%",
+              "width": "30%",
               "attr": "command",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter command (e.g., OPEN, CLOSE)"
+              "placeholder": "Enter command"
             }
           ]
         }
