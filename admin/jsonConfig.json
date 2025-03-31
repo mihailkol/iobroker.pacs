@@ -90,11 +90,8 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "options": {
-                "type": "query",
-                "query": "getDevicesList",
-                "attr": "devices"
-              },
+              "options": [], // Пустой массив по умолчанию
+              "query": "getDevicesList", // Отдельный параметр для запроса
               "multiple": true
             }
           ]
@@ -134,11 +131,8 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "options": {
-                "type": "query",
-                "query": "getObjectsList",
-                "attr": "objects"
-              }
+              "options": [], // Пустой массив по умолчанию
+              "query": "getObjectsList" // Отдельный параметр для запроса
             },
             {
               "type": "text",
