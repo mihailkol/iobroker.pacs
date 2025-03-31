@@ -1,61 +1,72 @@
 {
   "common": {
-    "name": "pacs",
+    "name": "iobroker.pacs",
     "version": "0.0.1",
-    "title": "PACS - Система контроля доступа",
-    "desc": {
-      "en": "Physical Access Control System for ioBroker",
-      "de": "Zutrittskontrollsystem für ioBroker",
-      "ru": "Система контроля физического доступа для ioBroker"
+    "title": "PACS Adapter",
+    "desc": "PACS adapter for user access control",
+    "authors": [
+      "Mikhail Kolesnikov <m89139158466@gmail.com>"
+    ],
+    "keywords": [
+      "PACS",
+      "users",
+      "devices",
+      "ioBroker"
+    ],
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
     },
-    "license": "MIT",
     "platform": "Javascript/Node.js",
-    "mode": "daemon",
     "icon": "admin/icon.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/mihailkol/ioBroker.pacs/main/admin/icon.png",
-    "keywords": [
-      "pacs",
-      "access control",
-      "security"
-    ],
-    "readme": "https://github.com/mihailkol/ioBroker.pacs/blob/main/README.md",
+    "extIcon": "https://github.com/mihailkol/iobroker.pacs/blob/master/admin/icon.png",
+    "readme": "https://github.com/mihailkol/iobroker.pacs/blob/master/README.md",
     "loglevel": "info",
-    "restartAdapters": [],
-    "localLink": "%web_protocol%://%ip%:%web_port%/pacs/index.html",
-    "type": "security",
+    "mode": "daemon",
+    "type": "communication",
+    "connectionType": "local",
+    "dataSource": "poll",
     "adminUI": {
       "config": "json"
     },
-    "supportCustoms": true,
+    "compact": true,
     "messagebox": true,
-    "eraseOnUpload": true,
     "dependencies": [
       {
-        "js-controller": ">=3.0.0"
+        "js-controller": ">=5.0.19"
       }
-    ]
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=6.0"
+      }
+    ],
+    "tier": 3
   },
   "native": {
-    "option1": true,
-    "option2": "42"
+    "users": [],
+    "devices": []
   },
+  "encryptedNative": [],
+  "protectedNative": [],
+  "objects": [],
   "instanceObjects": [
-    {
-      "_id": "devices",
-      "type": "channel",
-      "common": {
-        "name": "Устройства контроля доступа",
-        "desc": "Список устройств системы контроля доступа"
-      }
-    },
     {
       "_id": "users",
       "type": "channel",
       "common": {
-        "name": "Пользователи системы",
-        "desc": "Список пользователей с правами доступа"
-      }
+        "name": "Users"
+      },
+      "native": {}
+    },
+    {
+      "_id": "devices",
+      "type": "channel",
+      "common": {
+        "name": "Devices"
+      },
+      "native": {}
     }
   ]
 }
