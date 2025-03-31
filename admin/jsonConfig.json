@@ -23,7 +23,7 @@
             {
               "type": "text",
               "title": "Name",
-              "width": "20%",
+              "width": "15%",
               "attr": "name",
               "filter": false,
               "sort": false,
@@ -33,7 +33,7 @@
             {
               "type": "text",
               "title": "Phone",
-              "width": "20%",
+              "width": "15%",
               "attr": "phone",
               "filter": false,
               "sort": false,
@@ -43,7 +43,7 @@
             {
               "type": "text",
               "title": "Telegram ID",
-              "width": "20%",
+              "width": "15%",
               "attr": "telegramId",
               "filter": false,
               "sort": false,
@@ -51,14 +51,27 @@
               "placeholder": "Enter Telegram ID"
             },
             {
-              "type": "text",
+              "type": "select",
               "title": "Расписание",
-              "width": "20%",
+              "width": "15%",
               "attr": "schedule",
               "filter": false,
               "sort": false,
-              "default": "",
-              "placeholder": "Enter schedule (e.g., 9:00-18:00)"
+              "default": "рабочее время",
+              "options": [
+                {
+                  "value": "рабочее время",
+                  "label": "Рабочее время (9:00-18:00)"
+                },
+                {
+                  "value": "любой день",
+                  "label": "Любой день (круглосуточно)"
+                },
+                {
+                  "value": "всегда",
+                  "label": "Всегда (без ограничений)"
+                }
+              ]
             },
             {
               "type": "checkbox",
@@ -70,14 +83,19 @@
               "default": false
             },
             {
-              "type": "text",
+              "type": "select",
               "title": "Devices",
-              "width": "10%",
+              "width": "20%",
               "attr": "devices",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter devices (comma-separated)"
+              "options": {
+                "type": "query",
+                "query": "getDevicesList",
+                "attr": "devices"
+              },
+              "multiple": true
             }
           ]
         }
@@ -101,7 +119,7 @@
             {
               "type": "text",
               "title": "Name",
-              "width": "30%",
+              "width": "25%",
               "attr": "name",
               "filter": false,
               "sort": false,
@@ -109,18 +127,22 @@
               "placeholder": "Enter device name"
             },
             {
-              "type": "text",
+              "type": "select",
               "title": "Object",
-              "width": "30%",
+              "width": "35%",
               "attr": "object",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter object ID"
+              "options": {
+                "type": "query",
+                "query": "getObjectsList",
+                "attr": "objects"
+              }
             },
             {
               "type": "text",
-              "title": "Команда",
+              "title": "Command",
               "width": "40%",
               "attr": "command",
               "filter": false,

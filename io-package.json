@@ -18,7 +18,7 @@
       "type": "free"
     },
     "platform": "Javascript/Node.js",
-    "icon": "admin/icon.png",
+    "icon": "icon.png",
     "enabled": true,
     "extIcon": "https://github.com/mihailkol/iobroker.pacs/blob/master/admin/icon.png",
     "readme": "https://github.com/mihailkol/iobroker.pacs/blob/master/README.md",
