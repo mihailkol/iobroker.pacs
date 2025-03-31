@@ -2,11 +2,11 @@
 
 const utils = require("@iobroker/adapter-core");
 
-class DtmfAdapter extends utils.Adapter {
+class PacsAdapter extends utils.Adapter {
     constructor(options = {}) {
         super({
             ...options,
-            name: "dtmf", // Название адаптера
+            name: "pacs", // Название адаптера
         });
 
         this.modemPort = null; // Переменная для хранения экземпляра порта

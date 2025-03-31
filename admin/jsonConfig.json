@@ -136,16 +136,6 @@
               "sort": false,
               "default": "",
               "placeholder": "Enter object ID"
-            },
-            {
-              "type": "text",
-              "title": "DTMF Command",
-              "width": "40%",
-              "attr": "dtmfCommand",
-              "filter": false,
-              "sort": false,
-              "default": "",
-              "placeholder": "Enter DTMF command"
             }
           ]
         }
