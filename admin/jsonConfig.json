@@ -52,30 +52,30 @@
             },
             {
               "type": "select",
-              "title": "Расписание",
+              "title": "Schedule",
               "width": "15%",
               "attr": "schedule",
               "filter": false,
               "sort": false,
-              "default": "рабочее время",
+              "default": "working_hours",
               "options": [
                 {
-                  "value": "рабочее время",
-                  "label": "Рабочее время (9:00-18:00)"
+                  "value": "working_hours",
+                  "label": "Working hours (9:00-18:00)"
                 },
                 {
-                  "value": "любой день",
-                  "label": "Любой день (круглосуточно)"
+                  "value": "any_time",
+                  "label": "Any time (24/7)"
                 },
                 {
-                  "value": "всегда",
-                  "label": "Всегда (без ограничений)"
+                  "value": "always",
+                  "label": "Always (no restrictions)"
                 }
               ]
             },
             {
               "type": "checkbox",
-              "title": "Администратор",
+              "title": "Is Admin",
               "width": "10%",
               "attr": "isAdmin",
               "filter": false,
@@ -90,8 +90,11 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "options": [], // Пустой массив по умолчанию
-              "query": "getDevicesList", // Отдельный параметр для запроса
+              "options": [],
+              "query": {
+                "method": "getDevicesList",
+                "params": {}
+              },
               "multiple": true
             }
           ]
@@ -131,8 +134,13 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "options": [], // Пустой массив по умолчанию
-              "query": "getObjectsList" // Отдельный параметр для запроса
+              "options": [],
+              "query": {
+                "method": "getObjectsList",
+                "params": {
+                  "type": "device"
+                }
+              }
             },
             {
               "type": "text",
