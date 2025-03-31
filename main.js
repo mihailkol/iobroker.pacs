@@ -200,7 +200,7 @@ class PacsAdapter extends utils.Adapter {
 
 // Экспорт адаптера
 if (require.main !== module) {
-    module.exports = (options) => new DtmfAdapter(options);
+    module.exports = (options) => new PacsAdapter(options);
 } else {
-    (() => new DtmfAdapter())();
+    (() => new PacsAdapter())();
 }
