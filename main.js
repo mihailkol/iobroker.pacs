@@ -12,8 +12,6 @@ class PacsAdapter extends utils.Adapter {
         this.on("ready", this.onReady.bind(this));
         this.on("message", this.onMessage.bind(this));
         this.on("unload", this.onUnload.bind(this));
-        this.on("objectChange", this.onObjectChange.bind(this));
-        this.on("stateChange", this.onStateChange.bind(this));
     }
 
     /**
@@ -28,10 +26,6 @@ class PacsAdapter extends utils.Adapter {
 
             // Синхронизация данных из конфига
             await this.syncConfigData();
-
-            // Подписка на изменения
-            await this.subscribeStatesAsync("users.*");
-            await this.subscribeStatesAsync("devices.*");
 
             this.log.info("Adapter successfully initialized");
         } catch (err) {
@@ -136,7 +130,7 @@ class PacsAdapter extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setStateAsync(`${userId}.${state.id}`, state.def, true);
+            await this.setStateAsync(`${userId}.${state.id}`, { val: state.def, ack: true });
         }
     }
 
@@ -177,50 +171,48 @@ class PacsAdapter extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setStateAsync(`${deviceId}.${state.id}`, state.def, true);
+            await this.setStateAsync(`${deviceId}.${state.id}`, { val: state.def, ack: true });
         }
     }
 
     /**
      * Метод для получения списка устройств (для выпадающего списка)
      */
-    async getDevicesList(params, callback) {
-        try {
-            const devices = await this.getDevicesAsync();
-            const result = devices.map(device => ({
-                value: device._id,
-                label: device.common.name || device._id
+    getDevicesList(params, callback) {
+        this.getObjectView('system', 'device', {}, (err, devices) => {
+            if (err) {
+                this.log.error(`Error getting devices list: ${err}`);
+                return callback([]);
+            }
+
+            const result = devices.rows.map(device => ({
+                value: device.id,
+                label: device.value.common.name || device.id
             }));
+
             callback(result);
-        } catch (err) {
-            this.log.error(`Error getting devices list: ${err}`);
-            callback([]);
-        }
+        });
     }
 
     /**
      * Метод для получения списка объектов ioBroker (для выпадающего списка)
      */
-    async getObjectsList(params, callback) {
-        try {
-            const objects = await this.getObjectListAsync({
-                startkey: '',
-                endkey: '\u9999',
-                include_docs: true
-            });
+    getObjectsList(params, callback) {
+        this.getObjectList({ startkey: '', endkey: '\u9999' }, (err, objects) => {
+            if (err) {
+                this.log.error(`Error getting objects list: ${err}`);
+                return callback([]);
+            }
 
             const result = objects.rows
-                .filter(obj => !obj.value.common.hidden)
+                .filter(obj => !obj.value.common || !obj.value.common.hidden)
                 .map(obj => ({
                     value: obj.id,
                     label: obj.value.common.name || obj.id
                 }));
 
             callback(result);
-        } catch (err) {
-            this.log.error(`Error getting objects list: ${err}`);
-            callback([]);
-        }
+        });
     }
 
     /**
@@ -233,7 +225,7 @@ class PacsAdapter extends utils.Adapter {
     /**
      * Обработка сообщений от admin UI
      */
-    async onMessage(obj) {
+    onMessage(obj) {
         if (typeof obj === 'object' && obj.command) {
             this.log.debug(`Received message: ${JSON.stringify(obj)}`);
 
@@ -263,30 +255,11 @@ class PacsAdapter extends utils.Adapter {
     }
 
     /**
-     * Обработка изменений объектов
-     */
-    async onObjectChange(id, obj) {
-        if (!id) return;
-        this.log.debug(`objectChange ${id}: ${JSON.stringify(obj)}`);
-    }
-
-    /**
-     * Обработка изменений состояний
-     */
-    async onStateChange(id, state) {
-        if (!id || !state || state.ack) return;
-        this.log.debug(`stateChange ${id}: ${JSON.stringify(state)}`);
-
-        // Здесь можно добавить обработку изменений состояний
-    }
-
-    /**
      * Выгрузка адаптера
      */
-    async onUnload(callback) {
+    onUnload(callback) {
         try {
             this.log.info("Cleaning up before shutdown...");
-            // Дополнительная очистка при необходимости
             callback();
         } catch (err) {
             callback(err);
