@@ -6,27 +6,27 @@ class DtmfAdapter extends utils.Adapter {
     constructor(options = {}) {
         super({
             ...options,
-            name: "dtmf", // Íàçâàíèå àäàïòåðà
+            name: "dtmf", // ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð°Ð´Ð°Ð¿Ñ‚ÐµÑ€Ð°
         });
 
-        this.modemPort = null; // Ïåðåìåííàÿ äëÿ õðàíåíèÿ ýêçåìïëÿðà ïîðòà
+        this.modemPort = null; // ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ Ð´Ð»Ñ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ ÑÐºÐ·ÐµÐ¼Ð¿Ð»ÑÑ€Ð° Ð¿Ð¾Ñ€Ñ‚Ð°
 
-        // Ïîäïèñêà íà ñîáûòèÿ
+        // ÐŸÐ¾Ð´Ð¿Ð¸ÑÐºÐ° Ð½Ð° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ
         this.on("ready", this.onReady.bind(this));
         this.on("message", this.onMessage.bind(this));
         this.on("unload", this.onUnload.bind(this));
     }
 
     /**
-     * Èíèöèàëèçàöèÿ àäàïòåðà
+     * Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð°Ð´Ð°Ð¿Ñ‚ÐµÑ€Ð°
      */
     async onReady() {
         this.log.info("Adapter initialized");
 
-        // Ëîãèðóåì òåêóùóþ êîíôèãóðàöèþ
+        // Ð›Ð¾Ð³Ð¸Ñ€ÑƒÐµÐ¼ Ñ‚ÐµÐºÑƒÑ‰ÑƒÑŽ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸ÑŽ
         this.log.info(`Current config: ${JSON.stringify(this.config, null, 2)}`);
 
-        // Ñîçäàåì èëè îáíîâëÿåì îáúåêòû ïîëüçîâàòåëåé è óñòðîéñòâ íà îñíîâå êîíôèãóðàöèè
+        // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¸Ð»Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð¸ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð² Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¸
         await this.syncUsersAndDevices(this.config.users, this.config.devices);
 
         this.log.info('Adapter ready');
@@ -34,21 +34,21 @@ class DtmfAdapter extends utils.Adapter {
 
 
     /**
-     * Ñèíõðîíèçàöèÿ îáúåêòîâ ïîëüçîâàòåëåé è óñòðîéñòâ
+     * Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð² Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð¸ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²
      */
     async syncUsersAndDevices(users, devices) {
         this.log.info(`Users from config: ${JSON.stringify(users, null, 2)}`);
         this.log.info(`Devices from config: ${JSON.stringify(devices, null, 2)}`);
 
-        // Ïîëó÷àåì òåêóùèå îáúåêòû ïîëüçîâàòåëåé è óñòðîéñòâ
+        // ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð¸ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²
         const currentUsers = await this.getObjectListAsync({ startkey: `${this.namespace}.users.`, endkey: `${this.namespace}.users.\u9999` });
         const currentDevices = await this.getObjectListAsync({ startkey: `${this.namespace}.devices.`, endkey: `${this.namespace}.devices.\u9999` });
 
-        // Îáðàáîòêà ïîëüçîâàòåëåé
+        // ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹
         if (Array.isArray(users)) {
             const userNames = users.map(user => user.name.replace(/[^a-zA-Z0-9]/g, '_'));
 
-            // Óäàëÿåì ïîëüçîâàòåëåé, êîòîðûõ áîëüøå íåò â êîíôèãóðàöèè
+            // Ð£Ð´Ð°Ð»ÑÐµÐ¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÐµÑ‚ Ð² ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¸
             for (const userObj of currentUsers.rows) {
                 const userName = userObj.id.split('.').pop();
                 if (!userNames.includes(userName)) {
@@ -57,12 +57,12 @@ class DtmfAdapter extends utils.Adapter {
                 }
             }
 
-            // Ñîçäàåì èëè îáíîâëÿåì ïîëüçîâàòåëåé
+            // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¸Ð»Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹
             for (const user of users) {
                 const userId = `users.${user.name.replace(/[^a-zA-Z0-9]/g, '_')}`;
                 this.log.info(`Creating/updating user object: ${userId}`);
 
-                // Ñîçäàåì îáúåêò ïîëüçîâàòåëÿ
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
                 await this.setObjectNotExistsAsync(userId, {
                     type: 'folder',
                     common: {
@@ -72,7 +72,7 @@ class DtmfAdapter extends utils.Adapter {
                     native: {},
                 });
 
-                // Ñîçäàåì ñîñòîÿíèå äëÿ òåëåôîíà
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð´Ð»Ñ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð°
                 await this.setObjectNotExistsAsync(`${userId}.phone`, {
                     type: 'state',
                     common: {
@@ -86,29 +86,29 @@ class DtmfAdapter extends utils.Adapter {
                 });
                 await this.setStateAsync(`${userId}.phone`, user.phone, true);
 
-                // Ñîçäàåì ñîñòîÿíèå äëÿ óñòðîéñòâ
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð´Ð»Ñ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²
                 await this.setObjectNotExistsAsync(`${userId}.devices`, {
                     type: 'state',
                     common: {
                         name: 'Devices',
-                        type: 'string', // Åñëè devices - ýòî ìàññèâ, ìîæíî èñïîëüçîâàòü 'array'
+                        type: 'string', // Ð•ÑÐ»Ð¸ devices - ÑÑ‚Ð¾ Ð¼Ð°ÑÑÐ¸Ð², Ð¼Ð¾Ð¶Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ 'array'
                         role: 'info',
                         read: true,
                         write: true,
                     },
                     native: {},
                 });
-                await this.setStateAsync(`${userId}.devices`, JSON.stringify(user.devices), true); // Ñîõðàíÿåì êàê ñòðîêó
+                await this.setStateAsync(`${userId}.devices`, JSON.stringify(user.devices), true); // Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ ÐºÐ°Ðº ÑÑ‚Ñ€Ð¾ÐºÑƒ
             }
         } else {
             this.log.warn("Users data is not an array or not provided");
         }
 
-        // Îáðàáîòêà óñòðîéñòâ
+        // ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²
         if (Array.isArray(devices)) {
             const deviceNames = devices.map(device => device.name.replace(/[^a-zA-Z0-9]/g, '_'));
 
-            // Óäàëÿåì óñòðîéñòâà, êîòîðûõ áîëüøå íåò â êîíôèãóðàöèè
+            // Ð£Ð´Ð°Ð»ÑÐµÐ¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÐµÑ‚ Ð² ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¸
             for (const deviceObj of currentDevices.rows) {
                 const deviceName = deviceObj.id.split('.').pop();
                 if (!deviceNames.includes(deviceName)) {
@@ -117,12 +117,12 @@ class DtmfAdapter extends utils.Adapter {
                 }
             }
 
-            // Ñîçäàåì èëè îáíîâëÿåì óñòðîéñòâà
+            // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¸Ð»Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°
             for (const device of devices) {
                 const deviceId = `devices.${device.name.replace(/[^a-zA-Z0-9]/g, '_')}`;
                 this.log.info(`Creating/updating device object: ${deviceId}`);
 
-                // Ñîçäàåì îáúåêò óñòðîéñòâà
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°
                 await this.setObjectNotExistsAsync(deviceId, {
                     type: 'folder',
                     common: {
@@ -132,7 +132,7 @@ class DtmfAdapter extends utils.Adapter {
                     native: {},
                 });
 
-                // Ñîçäàåì ñîñòîÿíèå äëÿ deviceId
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð´Ð»Ñ deviceId
                 await this.setObjectNotExistsAsync(`${deviceId}.deviceId`, {
                     type: 'state',
                     common: {
@@ -146,7 +146,7 @@ class DtmfAdapter extends utils.Adapter {
                 });
                 await this.setStateAsync(`${deviceId}.deviceId`, device.deviceId, true);
 
-                // Ñîçäàåì ñîñòîÿíèå äëÿ DTMF
+                // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð´Ð»Ñ DTMF
                 await this.setObjectNotExistsAsync(`${deviceId}.DTMF`, {
                     type: 'state',
                     common: {
@@ -166,7 +166,7 @@ class DtmfAdapter extends utils.Adapter {
     }
 
     /**
-     * Îáðàáîòêà ñîîáùåíèé
+     * ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹
      */
     async onMessage(obj) {
         if (typeof obj === 'object' && obj.command) {
@@ -182,13 +182,13 @@ class DtmfAdapter extends utils.Adapter {
     }
 
     /**
-     * Âûãðóçêà àäàïòåðà
+     * Ð’Ñ‹Ð³Ñ€ÑƒÐ·ÐºÐ° Ð°Ð´Ð°Ð¿Ñ‚ÐµÑ€Ð°
      */
     async onUnload(callback) {
         try {
             this.log.info("Adapter shutting down...");
 
-            // Çàêðûâàåì ïîðò ìîäåìà
+            // Ð—Ð°ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð¿Ð¾Ñ€Ñ‚ Ð¼Ð¾Ð´ÐµÐ¼Ð°
             await this.closeModemPort();
         } catch (err) {
             this.log.error(`Error during shutdown: ${err}`);
@@ -198,7 +198,7 @@ class DtmfAdapter extends utils.Adapter {
     }
 }
 
-// Ýêñïîðò àäàïòåðà
+// Ð­ÐºÑÐ¿Ð¾Ñ€Ñ‚ Ð°Ð´Ð°Ð¿Ñ‚ÐµÑ€Ð°
 if (require.main !== module) {
     module.exports = (options) => new DtmfAdapter(options);
 } else {
