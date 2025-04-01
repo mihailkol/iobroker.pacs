@@ -28,7 +28,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter user name"
+              "placeholder": "User name"
             },
             {
               "type": "text",
@@ -38,7 +38,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter phone number"
+              "placeholder": "Phone number"
             },
             {
               "type": "text",
@@ -48,7 +48,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter Telegram ID"
+              "placeholder": "Telegram ID"
             },
             {
               "type": "select",
@@ -90,7 +90,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Device IDs, comma separated"
+              "placeholder": "Device IDs"
             }
           ]
         }
@@ -119,7 +119,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter device name"
+              "placeholder": "Device name"
             },
             {
               "type": "text",
@@ -129,7 +129,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter object ID"
+              "placeholder": "Object ID"
             },
             {
               "type": "text",
@@ -139,7 +139,7 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Enter command"
+              "placeholder": "Command"
             }
           ]
         }
@@ -178,30 +178,17 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Linked object ID"
+              "placeholder": "Object ID"
             },
             {
-              "type": "select",
+              "type": "text",
               "title": "Processing",
               "width": "30%",
               "attr": "processing",
               "filter": false,
               "sort": false,
-              "default": "log_only",
-              "options": [
-                {
-                  "value": "log_only",
-                  "label": "Log only"
-                },
-                {
-                  "value": "forward",
-                  "label": "Forward"
-                },
-                {
-                  "value": "process",
-                  "label": "Process"
-                }
-              ]
+              "default": "",
+              "placeholder": "Processing type"
             }
           ]
         }

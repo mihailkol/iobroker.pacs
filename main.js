@@ -18,16 +18,16 @@ class PacsAdapter extends utils.Adapter {
      * Инициализация адаптера
      */
     async onReady() {
-        this.log.info("Adapter initialization started");
+        this.log.info("Начало инициализации адаптера");
 
         // Создаём базовые объекты для событий
         await this.createEventObjects();
 
         // Загружаем конфигурацию
         this.config = this.native;
-        this.log.info("Configuration loaded:", JSON.stringify(this.config, null, 2));
+        this.log.info("Конфигурация загружена:", JSON.stringify(this.config, null, 2));
 
-        this.log.info("Adapter initialized successfully");
+        this.log.info("Адаптер успешно инициализирован");
     }
 
     /**
@@ -38,8 +38,8 @@ class PacsAdapter extends utils.Adapter {
         await this.setObjectNotExistsAsync("events", {
             type: "channel",
             common: {
-                name: "Events",
-                desc: "Channel for storing incoming and outgoing events"
+                name: "События",
+                desc: "Канал для хранения входящих и исходящих событий"
             },
             native: {}
         });
@@ -48,12 +48,12 @@ class PacsAdapter extends utils.Adapter {
         await this.setObjectNotExistsAsync("events.incoming", {
             type: "state",
             common: {
-                name: "Incoming events",
+                name: "Входящие события",
                 type: "array",
                 role: "list",
                 read: true,
                 write: true,
-                desc: "Storage for incoming events"
+                desc: "Хранилище входящих событий"
             },
             native: {}
         });
@@ -62,17 +62,17 @@ class PacsAdapter extends utils.Adapter {
         await this.setObjectNotExistsAsync("events.outgoing", {
             type: "state",
             common: {
-                name: "Outgoing events",
+                name: "Исходящие события",
                 type: "array",
                 role: "list",
                 read: true,
                 write: true,
-                desc: "Storage for outgoing events"
+                desc: "Хранилище исходящих событий"
             },
             native: {}
         });
 
-        this.log.info("Event objects created successfully");
+        this.log.info("Объекты событий успешно созданы");
     }
 
     /**
@@ -81,10 +81,9 @@ class PacsAdapter extends utils.Adapter {
     async onStateChange(id, state) {
         if (!state || state.ack) return;
 
-        this.log.debug(`State change: ${id} = ${JSON.stringify(state)}`);
+        this.log.debug(`Изменение состояния: ${id} = ${JSON.stringify(state)}`);
 
         // Здесь можно добавить обработку входящих событий
-        // и сохранение их в events.incoming
     }
 
     /**
@@ -92,7 +91,7 @@ class PacsAdapter extends utils.Adapter {
      */
     async onUnload(callback) {
         try {
-            this.log.info("Cleaning up before shutdown...");
+            this.log.info("Завершение работы адаптера...");
             callback();
         } catch (err) {
             callback(err);

@@ -3,22 +3,21 @@
     "name": "iobroker.pacs",
     "version": "0.0.1",
     "title": "PACS Adapter",
-    "desc": "PACS adapter for user access control with event tracking",
+    "desc": "Адаптер для контроля доступа PACS",
     "authors": [
       "Mikhail Kolesnikov <m89139158466@gmail.com>"
     ],
     "keywords": [
       "PACS",
-      "access control",
-      "events",
-      "users",
-      "devices"
+      "контроль доступа",
+      "пользователи",
+      "устройства"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "icon": "admin/icon.png",
     "enabled": true,
-    "extIcon": "https://github.com/mihailkol/iobroker.pacs/blob/master/admin/icon.png",
+    "extIcon": "https://raw.githubusercontent.com/mihailkol/iobroker.pacs/master/admin/icon.png",
     "readme": "https://github.com/mihailkol/iobroker.pacs/blob/master/README.md",
     "loglevel": "info",
     "mode": "daemon",
@@ -55,8 +54,8 @@
       "_id": "events",
       "type": "channel",
       "common": {
-        "name": "Events",
-        "desc": "Channel for storing events"
+        "name": "События",
+        "desc": "Канал для хранения событий"
       },
       "native": {}
     },
@@ -64,12 +63,12 @@
       "_id": "events.incoming",
       "type": "state",
       "common": {
-        "name": "Incoming events",
+        "name": "Входящие события",
         "type": "array",
         "role": "list",
         "read": true,
         "write": true,
-        "desc": "Storage for incoming events"
+        "desc": "Хранилище входящих событий"
       },
       "native": {}
     },
@@ -77,12 +76,12 @@
       "_id": "events.outgoing",
       "type": "state",
       "common": {
-        "name": "Outgoing events",
+        "name": "Исходящие события",
         "type": "array",
         "role": "list",
         "read": true,
         "write": true,
-        "desc": "Storage for outgoing events"
+        "desc": "Хранилище исходящих событий"
       },
       "native": {}
     }
