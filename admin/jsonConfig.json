@@ -7,7 +7,7 @@
   "items": {
     "usersTab": {
       "type": "panel",
-      "label": "Users",
+      "label": "Пользователи",
       "items": {
         "users": {
           "type": "table",
@@ -17,28 +17,28 @@
           "md": 12,
           "lg": 12,
           "xl": 12,
-          "label": "Users",
+          "label": "Список пользователей",
           "uniqueColumns": [ "name" ],
           "items": [
             {
               "type": "text",
-              "title": "Name",
+              "title": "Имя",
               "width": "20%",
               "attr": "name",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "User name"
+              "placeholder": "Имя пользователя"
             },
             {
               "type": "text",
-              "title": "Phone",
+              "title": "Телефон",
               "width": "15%",
               "attr": "phone",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Phone number"
+              "placeholder": "Номер телефона"
             },
             {
               "type": "text",
@@ -48,11 +48,11 @@
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Telegram ID"
+              "placeholder": "ID в Telegram"
             },
             {
               "type": "select",
-              "title": "Schedule",
+              "title": "График доступа",
               "width": "15%",
               "attr": "schedule",
               "filter": false,
@@ -61,21 +61,21 @@
               "options": [
                 {
                   "value": "working_hours",
-                  "label": "Working hours"
+                  "label": "Рабочее время"
                 },
                 {
                   "value": "any_time",
-                  "label": "Any time"
+                  "label": "Круглосуточно"
                 },
                 {
                   "value": "always",
-                  "label": "Always"
+                  "label": "Без ограничений"
                 }
               ]
             },
             {
               "type": "checkbox",
-              "title": "Is Admin",
+              "title": "Администратор",
               "width": "10%",
               "attr": "isAdmin",
               "filter": false,
@@ -84,13 +84,13 @@
             },
             {
               "type": "text",
-              "title": "Devices",
+              "title": "Устройства",
               "width": "25%",
               "attr": "devices",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Device IDs"
+              "placeholder": "ID устройств"
             }
           ]
         }
@@ -98,7 +98,7 @@
     },
     "devicesTab": {
       "type": "panel",
-      "label": "Devices",
+      "label": "Устройства",
       "items": {
         "devices": {
           "type": "table",
@@ -108,38 +108,38 @@
           "md": 12,
           "lg": 12,
           "xl": 12,
-          "label": "Devices",
+          "label": "Список устройств",
           "uniqueColumns": [ "name" ],
           "items": [
             {
               "type": "text",
-              "title": "Name",
+              "title": "Название",
               "width": "30%",
               "attr": "name",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Device name"
+              "placeholder": "Название устройства"
             },
             {
               "type": "text",
-              "title": "Object",
+              "title": "Объект",
               "width": "40%",
               "attr": "object",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Object ID"
+              "placeholder": "ID объекта"
             },
             {
               "type": "text",
-              "title": "Command",
+              "title": "Команда",
               "width": "30%",
               "attr": "command",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Command"
+              "placeholder": "Команда управления"
             }
           ]
         }
@@ -147,7 +147,7 @@
     },
     "channelsTab": {
       "type": "panel",
-      "label": "Incoming Channels",
+      "label": "Входящие каналы",
       "items": {
         "incomingChannels": {
           "type": "table",
@@ -157,38 +157,38 @@
           "md": 12,
           "lg": 12,
           "xl": 12,
-          "label": "Incoming Channels",
+          "label": "Список каналов",
           "uniqueColumns": [ "name" ],
           "items": [
             {
               "type": "text",
-              "title": "Name",
+              "title": "Название",
               "width": "30%",
               "attr": "name",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Channel name"
+              "placeholder": "Название канала"
             },
             {
               "type": "text",
-              "title": "Object",
+              "title": "Объект",
               "width": "40%",
               "attr": "object",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Object ID"
+              "placeholder": "Связанный объект"
             },
             {
               "type": "text",
-              "title": "Processing",
+              "title": "Обработка",
               "width": "30%",
               "attr": "processing",
               "filter": false,
               "sort": false,
               "default": "",
-              "placeholder": "Processing type"
+              "placeholder": "Тип обработки"
             }
           ]
         }
