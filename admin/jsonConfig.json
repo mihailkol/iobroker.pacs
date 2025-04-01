@@ -144,6 +144,68 @@
           ]
         }
       }
+    },
+    "channelsTab": {
+      "type": "panel",
+      "label": "Incoming Channels",
+      "items": {
+        "incomingChannels": {
+          "type": "table",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "label": "Incoming Channels",
+          "uniqueColumns": [ "name" ],
+          "items": [
+            {
+              "type": "text",
+              "title": "Name",
+              "width": "30%",
+              "attr": "name",
+              "filter": false,
+              "sort": false,
+              "default": "",
+              "placeholder": "Channel name"
+            },
+            {
+              "type": "text",
+              "title": "Object",
+              "width": "40%",
+              "attr": "object",
+              "filter": false,
+              "sort": false,
+              "default": "",
+              "placeholder": "Linked object ID"
+            },
+            {
+              "type": "select",
+              "title": "Processing",
+              "width": "30%",
+              "attr": "processing",
+              "filter": false,
+              "sort": false,
+              "default": "log_only",
+              "options": [
+                {
+                  "value": "log_only",
+                  "label": "Log only"
+                },
+                {
+                  "value": "forward",
+                  "label": "Forward"
+                },
+                {
+                  "value": "process",
+                  "label": "Process"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   }
 }

@@ -3,13 +3,14 @@
     "name": "iobroker.pacs",
     "version": "0.0.1",
     "title": "PACS Adapter",
-    "desc": "PACS adapter for user access control",
+    "desc": "PACS adapter for user access control with event tracking",
     "authors": [
       "Mikhail Kolesnikov <m89139158466@gmail.com>"
     ],
     "keywords": [
       "PACS",
       "access control",
+      "events",
       "users",
       "devices"
     ],
@@ -43,10 +44,47 @@
   },
   "native": {
     "users": [],
-    "devices": []
+    "devices": [],
+    "incomingChannels": []
   },
   "encryptedNative": [],
   "protectedNative": [],
   "objects": [],
-  "instanceObjects": []
+  "instanceObjects": [
+    {
+      "_id": "events",
+      "type": "channel",
+      "common": {
+        "name": "Events",
+        "desc": "Channel for storing events"
+      },
+      "native": {}
+    },
+    {
+      "_id": "events.incoming",
+      "type": "state",
+      "common": {
+        "name": "Incoming events",
+        "type": "array",
+        "role": "list",
+        "read": true,
+        "write": true,
+        "desc": "Storage for incoming events"
+      },
+      "native": {}
+    },
+    {
+      "_id": "events.outgoing",
+      "type": "state",
+      "common": {
+        "name": "Outgoing events",
+        "type": "array",
+        "role": "list",
+        "read": true,
+        "write": true,
+        "desc": "Storage for outgoing events"
+      },
+      "native": {}
+    }
+  ]
 }
